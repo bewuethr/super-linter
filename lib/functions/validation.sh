@@ -52,7 +52,7 @@ function GetValidationInfo() {
     local VALIDATE_LANGUAGE
     VALIDATE_LANGUAGE="VALIDATE_${LANGUAGE}"
     debug "Set VALIDATE_LANGUAGE while validating the configuration: ${VALIDATE_LANGUAGE}"
-    if [ -n "${!VALIDATE_LANGUAGE}" ]; then
+    if [ -n "${!VALIDATE_LANGUAGE:-}" ]; then
       # Validate if user provided a string representing a valid boolean
       ValidateBooleanVariable "${VALIDATE_LANGUAGE}" "${!VALIDATE_LANGUAGE}"
       # It was set, need to set flag
@@ -108,7 +108,7 @@ function GetValidationInfo() {
   ##############################
   # Validate Ansible Directory #
   ##############################
-  if [ -z "${ANSIBLE_DIRECTORY}" ]; then
+  if [ -z "${ANSIBLE_DIRECTORY:-}" ]; then
     ANSIBLE_DIRECTORY="${GITHUB_WORKSPACE}/ansible"
     debug "Set ANSIBLE_DIRECTORY to the default: ${ANSIBLE_DIRECTORY}"
   else
@@ -267,8 +267,8 @@ function WarnIfVariableIsSet() {
 function ValidateDeprecatedVariables() {
 
   # The following variables have been deprecated in v6
-  WarnIfVariableIsSet "${ERROR_ON_MISSING_EXEC_BIT}" "ERROR_ON_MISSING_EXEC_BIT"
-  WarnIfVariableIsSet "${EXPERIMENTAL_BATCH_WORKER}" "EXPERIMENTAL_BATCH_WORKER"
-  WarnIfVariableIsSet "${VALIDATE_JSCPD_ALL_CODEBASE}" "VALIDATE_JSCPD_ALL_CODEBASE"
-  WarnIfVariableIsSet "${VALIDATE_KOTLIN_ANDROID}" "VALIDATE_KOTLIN_ANDROID"
+  WarnIfVariableIsSet "${ERROR_ON_MISSING_EXEC_BIT:-}" "ERROR_ON_MISSING_EXEC_BIT"
+  WarnIfVariableIsSet "${EXPERIMENTAL_BATCH_WORKER:-}" "EXPERIMENTAL_BATCH_WORKER"
+  WarnIfVariableIsSet "${VALIDATE_JSCPD_ALL_CODEBASE:-}" "VALIDATE_JSCPD_ALL_CODEBASE"
+  WarnIfVariableIsSet "${VALIDATE_KOTLIN_ANDROID:-}" "VALIDATE_KOTLIN_ANDROID"
 }
