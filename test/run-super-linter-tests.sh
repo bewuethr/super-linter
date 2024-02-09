@@ -20,6 +20,10 @@ run_test_cases_expect_success() {
 
 run_test_cases_log_level() {
   run_test_cases_expect_success
+}
+
+run_test_cases_expect_failure_notice_log() {
+  run_test_cases_expect_failure
   LOG_LEVEL="NOTICE"
 }
 
